@@ -1,15 +1,11 @@
 # 2016_spring_Spark_Tutorial
 
-After downloaded Spark-1.6.0-bin-hadoop.2.6
-Change directory to spark 
-```bash
-cd ~/spark-1.6.0-bin-hadoop2.6/
-```
-
 Use Spark shell
-```bash
-./bin/spark-shell
-```
+
+1. After downloaded Spark-1.6.0-bin-hadoop.2.6
+2.  ``` cd ~/spark-1.6.0-bin-hadoop2.6/ ```
+3.  ``` ./bin/spark-shell ```
+
 
 Spark-shell
 ```scala
@@ -44,7 +40,16 @@ object test {
   }
 }
 ```
+---
+How to use spark-submit with IntelliJ IDEA
 
+1. click "Terminal" on the bottom side
+2. ``` sbt package```
+3. now you have a .jar in your project\target\scala-2.10\YOURPROJECT_2.10-1.0.jar
+4. ``` cd SPARK_DIRECTORY```
+5. ``` .\bin\spark-submit --name "test" --master local \...\YOURPROJECT_2.10-1.0.jar ```
+
+---
 
 
 
