@@ -53,5 +53,17 @@ object test {
 
 ---
 
+##Troubleshooting
+*java.lang.IllegalArgumentException: System memory 259522560 must be at least 4.718592E8. Please use a larger heap size.*
+
+1. "Run" -> "Edit Configuration" -> "Application"
+2. Main class: YOUR_MAIN_OBJECT
+3. VM options: -Xmx512m
+
+*ERROR Shell: Failed to locate the winutils binary in the hadoop binary path*
+*java.io.IOException: Could not locate executable null\bin\winutils.exe in the Hadoop binaries.*
+
+1. https://github.com/srccodes/hadoop-common-2.2.0-bin/tree/master/bin
+2. ``` System.setProperty("hadoop.home.dir", "\...\hadoop-common-2.2.0-bin-master")``` in Main function
 
 
