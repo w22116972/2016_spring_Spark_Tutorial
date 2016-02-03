@@ -1,6 +1,6 @@
 # 2016_spring_Spark_Tutorial
 
-Use Spark shell
+####Use Spark shell
 
 1. After downloaded Spark-1.6.0-bin-hadoop.2.6
 2.  ``` cd ~/spark-1.6.0-bin-hadoop2.6/ ```
@@ -18,7 +18,9 @@ text.take(10)
 text.collect()
 ```
 
-Simple word count
+---
+
+####Simple word count
 ```scala
 import org.apache.spark.SparkContext
 import org.apache.spark.SparkConf
@@ -41,7 +43,7 @@ object test {
 }
 ```
 ---
-How to use spark-submit with IntelliJ IDEA
+####How to use spark-submit with IntelliJ IDEA
 
 1. click "Terminal" on the bottom side
 2. ``` sbt package```
