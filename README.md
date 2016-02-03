@@ -33,7 +33,8 @@ text.collect()
 2. ``` sbt package```
 3. now you have a .jar in your project\target\scala-2.10\YOURPROJECT_2.10-1.0.jar
 4. ``` cd SPARK_DIRECTORY```
-5. ``` .\bin\spark-submit --name "test" --master local \...\YOURPROJECT_2.10-1.0.jar ```
+5. MAC: ``` ./bin/spark_submit --name "test" --master local /.../YOURPROJECT_2.10-1.0.jar```
+6. WIN: ``` .\bin\spark-submit --name "test" --master local \...\YOURPROJECT_2.10-1.0.jar ```
 
 ---
 
