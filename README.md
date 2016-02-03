@@ -40,7 +40,7 @@ text.collect()
 *ERROR Shell: Failed to locate the winutils binary in the hadoop binary path*
 *java.io.IOException: Could not locate executable null\bin\winutils.exe in the Hadoop binaries.*
 
-1. https://github.com/srccodes/hadoop-common-2.2.0-bin/tree/master/bin
+1. https://github.com/NCTUee104/hadoop-common-2.2.0-bin
 2. ``` System.setProperty("hadoop.home.dir", "\...\hadoop-common-2.2.0-bin-master")``` in Main function
 
 
