@@ -5,7 +5,7 @@
 **MAC ver.**
 
 1. After downloaded Spark-1.6.0-bin-hadoop.2.6
-2.  ``` cd ~/spark-1.6.0-bin-hadoop2.6/ ```
+2.  ``` cd ~/spark-1.6.0-bin-hadoop2.6 ```
 3.  ``` ./bin/spark-shell ```
 
 **Windows ver.**
