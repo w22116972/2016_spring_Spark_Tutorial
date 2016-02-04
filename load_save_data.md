@@ -66,3 +66,32 @@ val sc = new SparkContext(conf)
 Cassandra connector reads a job property to determine which cluster to connect to.
 
 If usrName + pwd => *spark.cassandra.auth.username*,  *spark.cassandra.auth.password*
+
+```scala
+import com.datastax.spark.connector._
+// Read entire table as an RDD. Assumes your table test was created as
+// CREATE TABLE test.kv(key text PRIMARY KEY, value int);
+val data = sc.cassandraTable("test" , "kv")
+//or sc.cassandraTable(…).where("key=?", "panda")
+// Print some basic stats on the value field.
+data.map(row => row.getInt("value")).stats()
+
+/** saving to Cassandra*/
+val rdd = sc.parallelize(List(Seq("moremagic", 1)))
+rdd.saveToCassandra("test" , "kv", SomeColumns("key", "value"))
+```
+
+---
+
+## HBase
+
+```scala
+import org.apache.hadoop.hbase.HBaseConfiguration
+import org.apache.hadoop.hbase.client.Result
+import org.apache.hadoop.hbase.io.ImmutableBytesWritable
+import org.apache.hadoop.hbase.mapreduce.TableInputFormat
+val conf = HBaseConfiguration.create()
+conf.set(TableInputFormat.INPUT_TABLE, "tablename") // which table to scan
+val rdd = sc.newAPIHadoopRDD(
+conf, classOf[TableInputFormat], classOf[ImmutableBytesWritable], classOf[Result])
+```
