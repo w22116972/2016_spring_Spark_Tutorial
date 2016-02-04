@@ -53,8 +53,16 @@ data.saveAsSequenceFile("OUTPUT_DIRECTORY")
 
 ## Cassandra
 
-SBT dependency
+SBT dependency :
 ```
 libraryDependencies += "com.datastax.spark" %% "spark-cassandra-connector" % "1.5.0-RC1"
 ```
 
+```scala
+/** point to our Cassandra cluster */
+val conf = new SparkConf(true).set("spark.cassandra.connection.host", "hostname")
+val sc = new SparkContext(conf)
+```
+Cassandra connector reads a job property to determine which cluster to connect to.
+
+If usrName + pwd => *spark.cassandra.auth.username*,  *spark.cassandra.auth.password*
