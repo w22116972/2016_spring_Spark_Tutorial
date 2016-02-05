@@ -70,6 +70,8 @@ Data files that you want to distribute to each node.
 - consists of a master and multiple workers, each with a configured amount of memory and CPU cores
 
 ```bash
+./sbin/start-master.sh
+./sbin/start-slave.sh http://localhost:8080 
 spark-submit --master spark://masternode:7077 yourapp
 ```
 
@@ -108,3 +110,47 @@ $ chmod 644 ~/.ssh/authorized_keys
 ```bash
 spark-submit --master mesos://masternode:5050 yourapp
 ```
+
+#### modes to share resources between executors on the same cluster :
+**Coarse-grained**
+
+- executors scale up and down the number of CPUs they claim from Mesos as they execute tasks.
+- dynamically share CPU resources between them
+
+**Fine-grained**
+
+- allocates a fixed number of CPUs to each executor in advance and never releases them until the application ends
+
+#### Deploy
+
+- slave must have a Spark binary package for running the Spark Mesos executor backend.
+Spark package can be hosted at any Hadoop-accessible URI, including HTTP via http://, Amazon Simple Storage Service via s3n://, or HDFS via hdfs://.
+- install Spark in the same location in all the Mesos slaves, and configure spark.mesos.executor.home (defaults to SPARK_HOME) to point to that location.
+- To use a precompiled package:
+Download a Spark binary package from the Spark download page
+Upload to hdfs/http/s3
+To host on HDFS, use the Hadoop fs put command: hadoop fs -put spark-1.6.0.tar.gz /path/to/spark-1.6.0.tar.gz
+
+#### Client Mode
+1. In spark-env.sh set some environment variables:
+export MESOS_NATIVE_JAVA_LIBRARY=<path to libmesos.so>. This path is typically <prefix>/lib/libmesos.so where the prefix is /usr/local by default. See Mesos installation instructions above. On Mac OS X, the library is called libmesos.dylib instead of libmesos.so.
+export SPARK_EXECUTOR_URI=<URL of spark-1.6.0.tar.gz uploaded above>.
+2. set spark.executor.uri to <URL of spark-1.6.0.tar.gz>.
+```scala
+val conf = new SparkConf()
+  .setMaster("mesos://HOST:5050")
+  .setAppName("My app")
+  .set("spark.executor.uri", "<path to spark-1.6.0.tar.gz uploaded above>")
+```
+
+#### Run Mode
+```scala
+// Coarse-grained mode
+conf.set("spark.mesos.coarse", "true")
+// Fine-grained mode
+conf.set("spark.mesos.coarse", "false")
+```
+
+---
+
+## Amazon EC2
