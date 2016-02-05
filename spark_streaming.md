@@ -10,9 +10,13 @@ def createStreamingContext() = {
 val sc = new SparkContext(conf)
 // Create a StreamingContext with a 1 second batch size
 val ssc = new StreamingContext(sc, Seconds(1))
+val line = ssc.socketTextStream("hdfs://...//")
 ssc.checkpoint(checkpointDir)
+ssc
 }
-val ssc = StreamingContext.getOrCreate(checkpointDir, createStreamingContext _)
+val context = StreamingContext.getOrCreate(checkpointDir, createStreamingContext _)
+context.start()
+context.awaitTermination()
 ```
 
 #### Writing data to external system requires creating a connection object
