@@ -9,8 +9,8 @@
 - provide in-memory storage for RDDs that are cached by user programs
 
 Spark depends on a cluster manager to launch executors.
-1. The user submits an application using spark-submit.
 
+1. The user submits an application using spark-submit.
 2. spark-submit launches the driver program and invokes the main() method
 specified by the user.
 3. The driver program contacts the cluster manager to ask for resources to launch
