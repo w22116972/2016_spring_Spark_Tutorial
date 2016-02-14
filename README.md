@@ -15,11 +15,17 @@
 Spark-shell
 ```scala
 // relative path is based on spark directory
+/** each line in this text file is a new element of a single RDD */
 val text = sc.textFile("README.md")
-text.count()
+/** count the number of elements in this RDD */
+text.count() 
+/** count the number of elements which contain keyword "Spark" */
 text.filter(line => line.contains("Spark")).count()
+/** find first element in this RDD */
 text.first()
+/** list top 10 elements in this RDD */
 text.take(10)
+/** list all of elements in this RDD */
 text.collect()
 ```
 
